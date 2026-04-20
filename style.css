@@ -1,0 +1,380 @@
+:root {
+    --primary-dark: #070b19;
+    --sidebar-bg: #0a0f24;
+    --accent-blue: #2a4191;
+    --text-main: #2c3e50;
+    --bg-light: #f8f9fa;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 280px;
+    background-color: var(--sidebar-bg);
+    color: white;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.logo-wrapper {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.sidebar-logo {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+}
+
+.menu {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.menu li a {
+    display: block;
+    padding: 18px 30px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.menu li a:hover, .menu li a.active {
+    color: white;
+    background: rgba(255,255,255,0.05);
+    border-left: 4px solid var(--accent-blue);
+}
+
+/* --- MAIN CONTENT --- */
+.content {
+    margin-left: 280px; /* Szerokość sidebar */
+    flex: 1;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- HEADER BLOCK --- */
+.header-block {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-blue) 100%);
+    color: white;
+    padding: 80px 50px;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+}
+
+.header-block h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.header-block .accent {
+    color: #aeb9ff;
+}
+
+.header-block .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    font-weight: 300;
+}
+
+/* --- SEKCJA O NAS / USŁUGI --- */
+.about-section {
+    padding: 0 50px 50px 50px;
+    max-width: 1200px;
+}
+
+.about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.about-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-blue);
+}
+
+/* GRID USŁUG (Duże karty z pionowymi zdjęciami) */
+.services-grid.large-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.service-card.large-card {
+    background: white;
+    padding: 0;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card.large-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* --- POPRAWIONE STYLIZACJA DLA PIONOWYCH ZDJĘĆ --- */
+.card-image {
+    width: 100%;
+    /* 1. Usunięto stałą wysokość height: 450px */
+    height: auto; 
+    /* 2. Dodano portretowe proporcje ramki (Wysoka ramka) */
+    aspect-ratio: 2 / 3; 
+    /* 3. Powiedziano ramce, by kadrowała OD GÓRY, aby uratować głowy */
+    object-position: top center; 
+    
+    object-fit: cover;
+    border-bottom: 4px solid var(--accent-blue);
+    transition: transform 0.5s ease;
+}
+
+.service-card.large-card:hover .card-image {
+    transform: scale(1.05); 
+}
+
+/* Kontener na tekst pod zdjęciem */
+.large-card strong {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    padding: 25px 25px 10px 25px;
+    display: block;
+}
+
+.large-card p {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    padding: 0 25px 25px 25px;
+}
+
+/* Informacja pod siatką usług */
+.update-info {
+    margin-top: 40px;
+    padding: 20px;
+    background: #e9ecef;
+    border-radius: 8px;
+    font-style: italic;
+    text-align: center;
+}
+
+/* --- SEKCJA OSTATNICH DZIAŁAŃ --- */
+.activity-section {
+    padding: 50px;
+    max-width: 1000px;
+    background-color: white;
+    margin: 40px 50px 50px 50px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.activity-section h2 {
+    font-size: 2rem;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.activity-feed {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px; 
+}
+
+.activity-item {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.activity-date {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--primary-dark);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.activity-item h3 {
+    font-size: 1.8rem;
+    color: var(--accent-blue);
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+/* Układ pionowy dla posta (zdjęcie, potem tekst) */
+.activity-content {
+    display: flex;
+    flex-direction: column; 
+    gap: 25px;
+}
+
+/* Zdjęcie w aktualnościach jako duży baner z uratowanymi głowami */
+.activity-thumbnail {
+    width: 100%;
+    height: auto;
+    /* Dodano kadrowanie od góry również tutaj */
+    object-position: top center; 
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.activity-content p {
+    font-size: 1.15rem;
+    color: var(--text-main);
+    line-height: 1.8;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* --- CENNIK (Ze strony cennik.html) --- */
+.pricing-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--accent-blue);
+}
+
+.price-tag {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(42, 65, 145, 0.05);
+    border-radius: 8px;
+}
+
+.pricing-features {
+    list-style: none;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.pricing-features li::before {
+    content: "✓ ";
+    color: var(--accent-blue);
+    font-weight: bold;
+}
+
+/* --- MINIMALISTYCZNA STOPKA --- */
+.short-footer {
+    margin-top: auto; 
+    padding: 25px 0;
+    background-color: var(--primary-dark); 
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+.footer-bottom a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.footer-bottom a:hover {
+    color: var(--accent-blue);
+    text-decoration: underline;
+}
+
+/* --- RESPONSYWNOŚĆ --- */
+@media (max-width: 900px) {
+    .container { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; z-index: 1; }
+    .content { margin-left: 0; }
+    
+    .header-block { padding: 50px 30px; }
+    .header-block h1 { font-size: 2.2rem; }
+    
+    .about-section, .activity-section { padding: 30px; margin: 20px 0; }
+    
+    .services-grid.large-grid { grid-template-columns: 1fr; }
+    
+    /* Na telefonach ramka zdjęcia o proporcjach portretowych może być za duża. 
+       Wracamy do stałej wysokości, ale z kadrowaniem od góry. */
+    .card-image { 
+        height: 350px; 
+        aspect-ratio: auto; /* Wyłącza proporcje z głównego stylu */
+        object-position: top center; 
+    }
+    
+    .activity-thumbnail { height: auto; max-height: 300px; object-position: top center;}
+}
