@@ -382,9 +382,10 @@ body {
 
 /* --- SEKCJA MAPY (kontakt.html) --- */
 .map-section {
-    padding: 0 50px;
+    /* Zwiększamy lewy margines (trzecia wartość to dół, czwarta to lewa strona) */
+    padding: 0 50px 0 80px; /* <--- 80px to nowy lewy margines */
     max-width: 1200px;
-    margin-bottom: 40px; /* Odstęp między mapą a kartami kontaktowymi */
+    margin-bottom: 40px; 
 }
 
 .map-section h2 {
@@ -406,12 +407,13 @@ body {
 }
 
 .map-container {
+    margin-left: 20px; /* <--- TUTAJ DODAJESZ MARGINES (możesz zmienić np. na 30px lub 40px) */
     width: 100%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     border-bottom: 4px solid var(--accent-blue);
-    background-color: #eee; /* Tło ładowania */
+    background-color: #eee;
 }
 
 .map-container iframe {
