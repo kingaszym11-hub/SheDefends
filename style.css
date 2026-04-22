@@ -141,32 +141,46 @@ body {
     margin-top: 30px;
 }
 
-.service-card.large-card {
+/* Zwykły GRID USŁUG (dla kontakt, cennik) */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
     background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    border-top: 3px solid var(--accent-blue);
+}
+
+.service-card.large-card {
     padding: 0;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: none; /* Karty ze zdjęciami mają pasek na dole zdjęcia */
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-.service-card.large-card:hover {
+.service-card:hover {
     transform: translateY(-5px);
+}
+
+.service-card.large-card:hover {
     box-shadow: 0 15px 35px rgba(0,0,0,0.12);
 }
 
-/* --- POPRAWIONE STYLIZACJA DLA PIONOWYCH ZDJĘĆ --- */
+/* Stylizacja dla pionowych zdjęć */
 .card-image {
     width: 100%;
-    /* 1. Usunięto stałą wysokość height: 450px */
     height: auto; 
-    /* 2. Dodano portretowe proporcje ramki (Wysoka ramka) */
     aspect-ratio: 2 / 3; 
-    /* 3. Powiedziano ramce, by kadrowała OD GÓRY, aby uratować głowy */
     object-position: top center; 
-    
     object-fit: cover;
     border-bottom: 4px solid var(--accent-blue);
     transition: transform 0.5s ease;
@@ -176,12 +190,18 @@ body {
     transform: scale(1.05); 
 }
 
-/* Kontener na tekst pod zdjęciem */
+/* Kontener na tekst w zwykłej karcie */
+.service-card strong {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+}
+
+/* Kontener na tekst pod dużym zdjęciem */
 .large-card strong {
     font-size: 1.5rem;
-    color: var(--primary-dark);
     padding: 25px 25px 10px 25px;
-    display: block;
 }
 
 .large-card p {
@@ -198,6 +218,47 @@ body {
     border-radius: 8px;
     font-style: italic;
     text-align: center;
+}
+
+/* --- SEKCJA MAPY (kontakt.html) --- */
+.map-section {
+    padding: 0 50px 0 80px; /* Zwiększony lewy margines do 80px */
+    max-width: 1200px;
+    margin-bottom: 40px; 
+}
+
+.map-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.map-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-blue);
+}
+
+.map-container {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-bottom: 4px solid var(--accent-blue);
+    background-color: #eee;
+}
+
+.map-container iframe {
+    display: block;
+    width: 100%;
+    height: 400px;
+    border: none;
 }
 
 /* --- SEKCJA OSTATNICH DZIAŁAŃ --- */
@@ -251,18 +312,15 @@ body {
     line-height: 1.3;
 }
 
-/* Układ pionowy dla posta (zdjęcie, potem tekst) */
 .activity-content {
     display: flex;
     flex-direction: column; 
     gap: 25px;
 }
 
-/* Zdjęcie w aktualnościach jako duży baner z uratowanymi głowami */
 .activity-thumbnail {
     width: 100%;
     height: auto;
-    /* Dodano kadrowanie od góry również tutaj */
     object-position: top center; 
     object-fit: cover;
     border-radius: 12px;
@@ -290,17 +348,12 @@ body {
     text-decoration: underline;
 }
 
-/* --- CENNIK (Ze strony cennik.html) --- */
+/* --- CENNIK --- */
 .pricing-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    border-top: 4px solid var(--accent-blue);
 }
 
 .price-tag {
@@ -355,81 +408,79 @@ body {
     text-decoration: underline;
 }
 
-/* --- RESPONSYWNOŚĆ --- */
+/* --- RESPONSYWNOŚĆ (TELEFONY I TABLETY) --- */
 @media (max-width: 900px) {
+    /* 1. Reset układu */
     .container { flex-direction: column; }
-    .sidebar { width: 100%; height: auto; position: relative; z-index: 1; }
     .content { margin-left: 0; }
     
-    .header-block { padding: 50px 30px; }
+    /* 2. Menu górne zamiast bocznego */
+    .sidebar { 
+        width: 100%; 
+        height: auto; 
+        position: relative; 
+        z-index: 100; 
+        padding-bottom: 10px;
+    }
+    
+    .logo-wrapper { padding: 20px; }
+    .sidebar-logo { width: 120px; height: 120px; }
+    
+    /* 3. Poziome przyciski menu */
+    .menu {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        margin-top: 0;
+        padding: 0 10px;
+        gap: 5px;
+    }
+    
+    .menu li { border-bottom: none; }
+    
+    .menu li a {
+        padding: 8px 12px;
+        border-left: none; 
+        border-bottom: 3px solid transparent; 
+        font-size: 11px;
+    }
+    
+    .menu li a:hover, .menu li a.active {
+        border-left: none;
+        border-bottom: 3px solid var(--accent-blue);
+        background: transparent;
+    }
+    
+    /* 4. Teksty i sekcje */
+    .header-block { padding: 40px 20px; }
     .header-block h1 { font-size: 2.2rem; }
     
-    .about-section, .activity-section { padding: 30px; margin: 20px 0; }
+    .about-section, .activity-section { 
+        padding: 20px; 
+        margin: 15px 0; 
+    }
+
+    .map-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
     
+    /* 5. Karty w jednej kolumnie */
+    .services-grid { grid-template-columns: 1fr; }
     .services-grid.large-grid { grid-template-columns: 1fr; }
     
-    /* Na telefonach ramka zdjęcia o proporcjach portretowych może być za duża. 
-       Wracamy do stałej wysokości, ale z kadrowaniem od góry. */
+    /* 6. Zdjęcia i mapy */
     .card-image { 
         height: 350px; 
-        aspect-ratio: auto; /* Wyłącza proporcje z głównego stylu */
+        aspect-ratio: auto; 
         object-position: top center; 
     }
     
-    .activity-thumbnail { height: auto; max-height: 300px; object-position: top center;}
-}
-
-
-/* --- SEKCJA MAPY (kontakt.html) --- */
-.map-section {
-    /* Zwiększamy lewy margines (trzecia wartość to dół, czwarta to lewa strona) */
-    padding: 0 50px 0 80px; /* <--- 80px to nowy lewy margines */
-    max-width: 1200px;
-    margin-bottom: 40px; 
-}
-
-.map-section h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: var(--primary-dark);
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.map-section h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: var(--accent-blue);
-}
-
-.map-container {
-    margin-left: 20px; /* <--- TUTAJ DODAJESZ MARGINES (możesz zmienić np. na 30px lub 40px) */
-    width: 100%;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    border-bottom: 4px solid var(--accent-blue);
-    background-color: #eee;
-}
-
-.map-container iframe {
-    display: block; /* Usuwa domyślny margines pod iframe */
-    width: 100%;
-    height: 400px;
-    border: none;
-}
-
-/* Responsywność dla mapy na telefonach */
-@media (max-width: 900px) {
-    .map-section {
-        padding: 0 30px;
-        margin-bottom: 30px;
+    .activity-thumbnail { 
+        height: auto; 
+        max-height: 250px; 
+        object-position: top center;
     }
-    .map-container iframe {
-        height: 300px;
-    }
+    
+    .map-container iframe { height: 300px; }
 }
